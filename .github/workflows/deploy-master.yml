@@ -29,7 +29,9 @@ jobs:
           npm run test
 
       - name: Build Docker image
-        run: docker build  -t api:latest
+        run: |
+          cd ./api
+          docker build -t api:latest
 
       - name: Push Docker image
         run: docker push api:latest
