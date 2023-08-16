@@ -1,23 +1,23 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: api
+  name: database
   namespace: default
   labels:
-    app: api
+    app: database
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: api
+      app: database
   template:
     metadata:
       labels:
-        app: api
+        app: database
     spec:
       containers:
         - name: api
-          image: maykelldocker/database:latest
+          image: maykelldocker/postgresql-database:latest
           env:
             - name: SERVICE_NAME
               valueFrom:
@@ -25,3 +25,7 @@ spec:
                   fieldPath: metadata.labels['app']
             - name: NODE_ENV
               value: development
+            - name: POSTGRES_USER
+              value: the_user
+            - name: POSTGRES_PASSWORD
+              value: the_user_password
