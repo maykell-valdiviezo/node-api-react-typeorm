@@ -34,7 +34,7 @@ jobs:
           docker build -t api:latest .
 
       - name: Push Docker image
-        run: docker push api:latest
+        run: docker push maykelldocker/api:latest
 
       - name: Configure kubectl
         uses: azure/k8s-set-context@v1
