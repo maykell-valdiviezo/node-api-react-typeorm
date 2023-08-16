@@ -24,6 +24,7 @@ jobs:
 
       - name: Build and Test
         run: |
+          cd ./api
           npm run build
           npm run test
 
