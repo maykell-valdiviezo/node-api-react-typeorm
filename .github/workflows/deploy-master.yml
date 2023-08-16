@@ -1,0 +1,43 @@
+name: Deploy to Kubernetes
+
+on:
+  push:
+    branches:
+      - master
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Build and Test
+        run: |
+          npm run build
+          npm run test
+
+      - name: Build Docker image
+        run: docker build ./api/Dockerfile -t api:latest
+
+      - name: Push Docker image
+        run: docker push api:latest
+
+      - name: Configure kubectl
+        uses: azure/k8s-set-context@v1
+        with:
+          method: kubeconfig
+          kubeconfig: ${{ secrets.KUBECONFIG }}
+          context: ${{ secrets.KUBE_CONTEXT }}
+
+      - name: Deploy to Kubernetes
+        run: kubectl apply -f api.deployment.yml
+
