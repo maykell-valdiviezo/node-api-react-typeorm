@@ -26,7 +26,7 @@ jobs:
       - name: Build Docker image
         run: |
           cd ./api
-          docker build -t maykelldocker/postgresql-database:latest -f ./database.Dockerfile
+          docker build -t maykelldocker/postgresql-database:latest -f ./database.Dockerfile .
 
       - name: Push Docker image
         run: docker push maykelldocker/postgresql-database:latest
