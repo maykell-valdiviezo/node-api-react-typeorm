@@ -1,0 +1,40 @@
+version: "3.3"
+services:
+  api:
+    build:
+      context: ../api
+      dockerfile: ./Dockerfile
+    ports:
+      - "3001:3001"
+    env_file:
+      - ../api/docker.env
+    depends_on:
+      - database
+    networks:
+      - app-network
+  database:
+    restart: always
+    build:
+      context: ../api
+      dockerfile: ./database.Dockerfile
+    env_file:
+      - ../api/database.env
+    ports:
+      - "5433:5432"
+    networks:
+      - app-network
+  client:
+    build:
+      context: ../client
+      dockerfile: ./Dockerfile
+    ports:
+      - "3000:3000"
+    networks:
+      - app-network
+
+volumes:
+  postgres-data:
+
+networks:
+  app-network:
+    driver: bridge
