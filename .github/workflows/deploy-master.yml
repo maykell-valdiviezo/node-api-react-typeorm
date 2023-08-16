@@ -42,13 +42,13 @@ jobs:
       - name: Push Docker image
         run: docker push maykelldocker/api:latest
 
-      - name: Configure kubectl
-        uses: azure/k8s-set-context@v1
-        with:
-          method: kubeconfig
-          kubeconfig: ${{ secrets.KUBECONFIG }}
-          context: ${{ secrets.KUBE_CONTEXT }}
-
-      - name: Deploy to Kubernetes
-        run: kubectl apply -f api.deployment.yml
+#      - name: Configure kubectl
+#        uses: azure/k8s-set-context@v1
+#        with:
+#          method: kubeconfig
+#          kubeconfig: ${{ secrets.KUBECONFIG }}
+#          context: ${{ secrets.KUBE_CONTEXT }}
+#
+#      - name: Deploy to Kubernetes
+#        run: kubectl apply -f api.deployment.yml
 
