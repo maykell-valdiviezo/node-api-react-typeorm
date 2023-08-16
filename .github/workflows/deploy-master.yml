@@ -31,7 +31,7 @@ jobs:
       - name: Build Docker image
         run: |
           cd ./api
-          docker build -t api:latest
+          docker build -t api:latest .
 
       - name: Push Docker image
         run: docker push api:latest
