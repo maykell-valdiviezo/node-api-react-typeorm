@@ -36,7 +36,6 @@
     "**/*.tsx"
   ],
   "exclude": [
-    "node_modules",
-    "deployment.yml"
+    "node_modules"
   ]
 }
